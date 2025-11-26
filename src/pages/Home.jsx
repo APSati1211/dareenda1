@@ -8,7 +8,7 @@ export default function Home() {
 
   if (loading) return <div className="h-screen flex items-center justify-center">Loading Experience...</div>;
 
-  // --- 1. HERO SECTION ---
+  // --- 1. HERO SECTION -----
   const hero = {
     title: getField("hero_title", "title") || "Transforming Finance with Artificial Intelligence",
     subtitle: getField("hero_text") || "Automate accounting, audits, and compliance with XpertAI Global's next-gen solutions.",
