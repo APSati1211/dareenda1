@@ -9,7 +9,9 @@ const API = axios.create({
     withCredentials: true, // Ye Chatbot aur Session maintain karne ke liye zaroori hai
 });
 
-// Dynamic content fetch karne ke liye
+// --- 1. CMS & Pages (Legacy & New) ---
+
+// Dynamic content fetch karne ke liye (Old CMS)
 export const getPageContent = (page) => {
     if (page === "home") {
         return API.get("home-page-content/");
@@ -17,6 +19,14 @@ export const getPageContent = (page) => {
     return API.get(`sitecontent/?page=${page}`);
 };
 
+// --- 2. New App Data Fetchers (Dedicated Pages) ---
+export const getHomeData = () => API.get("homepage-data/");
+export const getResourcesPageData = () => API.get("resources-page-data/");
+export const getLeadSystemData = () => API.get("lead-system-data/");
+export const getServicesPageData = () => API.get("services-page-data/");
+export const getLegalPageData = (slug) => API.get(`legal/pages/${slug}/`);
+
+// --- 3. Blog ---
 // Blogs fetch karne ke liye (category filter ke saath)
 export const getBlogs = (categorySlug = '') => {
     let url = "blogs/";
@@ -29,37 +39,40 @@ export const getBlogs = (categorySlug = '') => {
 // Categories fetch karne ke liye
 export const getCategories = () => API.get("blog-categories/");
 
+// --- 4. Leads & Contact ---
 // Leads submit karne ke liye
 export const submitLead = (data) => API.post("leads/", data);
 
 // Contact form submit karne ke liye
 export const sendContact = (data) => API.post("contact/", data);
 
-// Careers / Jobs fetch karne ke liye
+// --- 5. Careers ---
+// Jobs fetch karne ke liye
 export const getJobs = () => API.get("jobs/");
+
+// Job Application submit karne ke liye
 export const applyForJob = (data) => API.post("apply/", data);
 
-// Resources aur Case Studies fetch karne ke liye
+// --- 6. Resources & Services Lists (Cards) ---
+// Case Studies fetch karne ke liye
 export const getCaseStudies = () => API.get("case-studies/");
+
+// Resources fetch karne ke liye
 export const getResources = () => API.get("resources/");
 
-// Services fetch karne ke liye
+// Services List fetch karne ke liye
 export const getServices = () => API.get("services/");
+
+// Specific Service Detail fetch karne ke liye
 export const getServiceBySlug = (slug) => API.get(`services/${slug}/`);
 
+// --- 7. Stakeholders ---
+// Stakeholders fetch karne ke liye
+export const getStakeholders = () => API.get("stakeholders/");
+
+// --- 8. Theme & Chatbot ---
 // Theme Settings fetch karne ke liye
 export const getThemeSettings = () => API.get("theme-settings/"); 
 
 // Chatbot Flow handle karne ke liye
 export const chatFlowHandler = (data) => API.post("chatbot-flow/", data);
-
-export const getStakeholders = () => API.get("stakeholders/");
-
-// --- Home Page ---
-export const getHomeData = () => API.get("homepage-data/");
-
-// --- Resources Page ---
-export const getResourcesPageData = () => API.get("resources-page-data/");
-
-// --- Lead System Page ---
-export const getLeadSystemData = () => API.get("lead-system-data/");

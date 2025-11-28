@@ -18,6 +18,7 @@ import Blog from "./pages/Blog";
 import Resources from "./pages/Resources";
 import Careers from "./pages/Careers";
 import ServiceDetail from "./pages/ServiceDetail";
+import LegalPage from "./pages/LegalPage";
 
 function App() {
   const [themeData, setThemeData] = useState(null);
@@ -61,6 +62,8 @@ function App() {
           <Route path="/resources" element={<Resources />} />
           <Route path="/careers" element={<Careers />} />
           <Route path="/services/:slug" element={<ServiceDetail />} />
+          <Route path="/terms-and-conditions" element={<LegalPage slug="terms-and-conditions" />} />
+          <Route path="/privacy-policy" element={<LegalPage slug="privacy-policy" />} />
         </Routes>
 
         {/* Footer */}
