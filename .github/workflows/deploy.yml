@@ -1,4 +1,4 @@
-name: CICD
+name: CMS-Backend
 
 on:
   push:
@@ -11,20 +11,51 @@ jobs:
     steps:
       - name: Checkout Source
         uses: actions/checkout@v4
-      - name: Login to Docker Hub
-        run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
-      - name: Build Docker Image
-        run: docker build -t akshaykumar0007/cms-frontend .
-      - name: Publish image to docker hub
-        run: docker push akshaykumar0007/cms-frontend:latest   
 
-  deploy: 
+      - name: Login to Docker Hub (build step)
+        env:
+          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+        run: |
+          echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+
+      - name: Build Docker Image
+        run: docker build -t akshaykumar0007/cms-backend:latest .
+
+      - name: Publish image to Docker Hub
+        run: docker push akshaykumar0007/cms-backend:latest
+
+  deploy:
     needs: build
-    runs-on: self-hosted    
+    # ensure this matches a runner that has docker available and the 'docker' label
+    runs-on: [self-hosted, linux, x64, docker]
     steps:
-      - name: Pull image from docker hub
-        run: docker pull akshaykumar0007/cms-frontend:latest
-      - name: Delete Old Container
-        run: docker rm -f reactContainer
+      - name: Login to Docker Hub (deploy host)
+        env:
+          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+        run: |
+          # login on the self-hosted runner so it can pull private images
+          echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+
+      - name: Pull image from Docker Hub
+        run: docker pull akshaykumar0007/cms-backend:latest
+
+      - name: Remove old containers (safe)
+        run: |
+          # remove specific named container if exists; ignore errors
+          docker rm -f BackendContainer || true
+          # optionally remove all stopped containers (uncomment if you want)
+          # docker rm $(docker ps -aq) || true
+
       - name: Run docker container
-        run: docker run -d -p 3000:80 --name reactContainer akshaykumar0007/cms-frontend   
+        run: |
+          # stop & remove any container using the target port (optional)
+          # lsof -i :3000 -t | xargs -r docker rm -f || true
+
+          # Run the new container (replace ports if needed)
+          docker run -d \
+            --name BackendContainer \
+            --restart unless-stopped \
+            -p 3000:80 \
+            akshaykumar0007/cms-backend:latest
