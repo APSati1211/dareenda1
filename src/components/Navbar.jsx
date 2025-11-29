@@ -17,7 +17,7 @@ export default function Navbar({ logo }) {
     window.addEventListener("scroll", handleScroll);
 
     // Fetch dynamic pages
-    axios.get("http://127.0.0.1:8000/api/pages/")
+    axios.get("http://15.206.207.118:8000/api/pages/")
       .then(res => setDynamicPages(res.data))
       .catch(err => console.error("Menu fetch error", err));
 
