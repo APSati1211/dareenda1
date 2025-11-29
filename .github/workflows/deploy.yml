@@ -23,6 +23,8 @@ jobs:
     runs-on: ec2-runner    
     steps:
       - name: Pull image from docker hub
-        run: docker pull akshaykumar0007/cms-frontend:latest 
+        run: docker pull akshaykumar0007/cms-frontend:latest
+      - name: Delete Old Container
+        run: docker rm -f react
       - name: Run docker container
         run: docker run -d -p 3000:80 --name reactContainer akshaykumar0007/cms-frontend   
