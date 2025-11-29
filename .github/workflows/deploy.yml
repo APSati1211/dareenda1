@@ -10,21 +10,21 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Source
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Login to Docker Hub
         run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
       - name: Build Docker Image
-        run: docker build --------- -t  .
+        run: docker buil dakshaykumar0007/cms-frontend -t  .
       - name: Publish image to docker hub
-        run: docker push --------:latest   
+        run: docker push akshaykumar0007/cms-frontend:latest   
 
   deploy: 
     needs: build
     runs-on: ec2-runner    
     steps:
       - name: Pull image from docker hub
-        run: docker pull ------------- :latest 
+        run: docker pull akshaykumar0007/cms-frontend:latest 
       - name: Delete Old Container
-        run: docker rm -f "previous container"
+        run: docker rm -f reactContainer
       - name: Run docker container
-        run: docker run -d -p 3000:80 --name reactContainer --------------------   
+        run: docker run -d -p 3000:80 --name reactContainer akshaykumar0007/cms-frontend   
