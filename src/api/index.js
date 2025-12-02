@@ -8,7 +8,7 @@ const BASE_URL = (typeof process !== 'undefined' && process.env?.REACT_APP_API_U
 
 const API = axios.create({
     baseURL: BASE_URL, 
-    withCredentials: true,
+    withCredentials: true, // Yeh zaroori hai
 });
 
 // --- 1. CMS & Pages ---

@@ -49,7 +49,13 @@ const Chatbot = () => {
     // 2. Handle User Response
     const handleSend = async () => {
         const answer = inputValue.trim();
-        if (!answer || isLoading) return;
+        
+        // Prevent sending empty answers if you want strict validation here too
+        if (!answer && currentField !== 'message') { // Allow empty message if it's optional
+             if (isLoading) return;
+        }
+        
+        if (isLoading) return;
 
         // Display User Message
         setMessages(prev => [...prev, { sender: 'user', text: answer }]);
@@ -65,7 +71,7 @@ const Chatbot = () => {
             const data = response.data;
             
             if (data.error) {
-                // Validation Error
+                // Validation Error form Backend
                 setMessages(prev => [...prev, { sender: 'bot', text: data.error, isError: true }]);
             } else {
                 // Success: Show next question
@@ -75,12 +81,20 @@ const Chatbot = () => {
                 if (data.next_field) {
                     setCurrentField(data.next_field); 
                 } else {
-                    setCurrentField(null); // Flow Complete
+                    // Chat Complete
+                    setCurrentField(null); 
+                    if (data.action === 'lead_captured') {
+                        // Optional: Close chat after a delay or show success state
+                        setTimeout(() => {
+                            // You can keep it open or close it
+                        }, 3000);
+                    }
                 }
             }
 
         } catch (error) {
-            setMessages(prev => [...prev, { sender: 'bot', text: 'Error sending message.' }]);
+            console.error("Sending Error:", error);
+            setMessages(prev => [...prev, { sender: 'bot', text: 'Error sending message. Please try again.' }]);
         } finally {
             setIsLoading(false);
         }
@@ -119,8 +133,8 @@ const Chatbot = () => {
                             <h3 className="font-semibold">XpertAI Assistant</h3>
                         </div>
                         <div className="flex gap-3">
-                             <button onClick={() => startFlow(true)} title="Restart"><RefreshCw size={16}/></button>
-                             <button onClick={() => setIsOpen(false)} title="Close">&times;</button>
+                             <button onClick={() => startFlow(true)} title="Restart" className="hover:text-blue-300 transition"><RefreshCw size={16}/></button>
+                             <button onClick={() => setIsOpen(false)} title="Close" className="hover:text-red-300 transition">&times;</button>
                         </div>
                     </div>
 
@@ -131,7 +145,9 @@ const Chatbot = () => {
                                 <div className={`max-w-[85%] p-3 rounded-2xl text-sm ${
                                     msg.sender === 'user' 
                                     ? 'bg-blue-600 text-white rounded-br-none' 
-                                    : 'bg-white text-gray-800 border border-gray-200 shadow-sm rounded-bl-none'
+                                    : msg.isError 
+                                        ? 'bg-red-50 text-red-600 border border-red-200 rounded-bl-none'
+                                        : 'bg-white text-gray-800 border border-gray-200 shadow-sm rounded-bl-none'
                                 }`}>
                                     {msg.text}
                                 </div>
@@ -161,7 +177,7 @@ const Chatbot = () => {
                         <button
                             className="p-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition"
                             onClick={handleSend}
-                            disabled={!inputValue.trim() || !currentField || isLoading}
+                            disabled={!currentField || isLoading}
                         >
                             <Send size={18} />
                         </button>
