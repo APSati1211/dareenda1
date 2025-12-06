@@ -324,7 +324,7 @@ export default function Home() {
         <div className="container mx-auto px-6 text-center relative z-10">
             <h2 className="text-3xl font-bold mb-12">Get Started Today</h2>
             <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-                <Link to="/register" className="bg-white/10 backdrop-blur-md p-8 rounded-2xl border border-white/20 hover:bg-white hover:text-blue-700 transition-all group hover:-translate-y-1">
+                <Link to="/contact" className="bg-white/10 backdrop-blur-md p-8 rounded-2xl border border-white/20 hover:bg-white hover:text-blue-700 transition-all group hover:-translate-y-1">
                     <div className="bg-white/20 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-blue-100 group-hover:text-blue-600 transition-colors">
                         <UserPlus size={32} />
                     </div>
