@@ -71,7 +71,7 @@ export default function ServiceDetail() {
                     </div>
                 </motion.div>
 
-                {/* Hero Visual */}
+                {/* Hero Visual - UPDATED CODE HERE */}
                 <motion.div 
                     initial={{ opacity: 0, scale: 0.9 }} 
                     animate={{ opacity: 1, scale: 1 }} 
@@ -79,10 +79,22 @@ export default function ServiceDetail() {
                     className="relative"
                 >
                     <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-purple-600 rounded-2xl blur-2xl opacity-20"></div>
-                    <div className="relative bg-slate-800 rounded-2xl border border-slate-700 p-8 aspect-video flex flex-col justify-center items-center text-center">
-                        <LucideIcons.Layers size={64} className="text-slate-600 mb-4" />
-                        <p className="text-slate-500 font-mono">Service Visual Placeholder</p>
-                    </div>
+                    
+                    {/* Check if Image Exists */}
+                    {service.image ? (
+                        <div className="relative rounded-2xl border border-slate-700 overflow-hidden aspect-video shadow-2xl">
+                            <img 
+                                src={service.image} 
+                                alt={service.title} 
+                                className="w-full h-full object-cover"
+                            />
+                        </div>
+                    ) : (
+                        <div className="relative bg-slate-800 rounded-2xl border border-slate-700 p-8 aspect-video flex flex-col justify-center items-center text-center">
+                            <LucideIcons.Layers size={64} className="text-slate-600 mb-4" />
+                            <p className="text-slate-500 font-mono">Service Visual Placeholder</p>
+                        </div>
+                    )}
                 </motion.div>
             </div>
         </div>
