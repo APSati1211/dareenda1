@@ -75,25 +75,25 @@ export default function Footer({ logo }) {
   ];
 
   return (
-    <footer className="bg-slate-950 text-slate-300 border-t border-white/5 relative overflow-hidden font-sans">
+    <footer className="bg-slate-200 text-slate-600 border-t border-slate-300 relative overflow-hidden font-sans">
       
-      {/* Background Elements */}
-      <div className="absolute top-0 left-1/4 w-96 h-96 bg-blue-900/20 rounded-full blur-3xl -translate-y-1/2 pointer-events-none"></div>
-      <div className="absolute bottom-0 right-0 w-64 h-64 bg-purple-900/10 rounded-full blur-3xl pointer-events-none"></div>
+      {/* Background Elements (Subtle Light Mode Blobs) */}
+      <div className="absolute top-0 left-1/4 w-96 h-96 bg-white/40 rounded-full blur-3xl -translate-y-1/2 pointer-events-none"></div>
+      <div className="absolute bottom-0 right-0 w-64 h-64 bg-blue-100/40 rounded-full blur-3xl pointer-events-none"></div>
 
       <div className="max-w-7xl mx-auto px-6 py-20 relative z-10">
         
         {/* TOP ROW: LOGO & NEWSLETTER */}
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-8 mb-16 border-b border-white/5 pb-12">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-8 mb-16 border-b border-slate-300 pb-12">
             <div className="max-w-md">
                 {logo ? (
                   <img src={logo} alt="XpertAI Global" className="h-10 mb-4 object-contain" />
                 ) : (
-                  <h2 className="text-3xl font-extrabold text-white tracking-tight mb-2">
-                    XpertAI <span className="text-blue-500">Global</span>
+                  <h2 className="text-3xl font-extrabold text-slate-900 tracking-tight mb-2">
+                    XpertAI <span className="text-blue-600">Global</span>
                   </h2>
                 )}
-                <p className="text-slate-400 text-sm leading-relaxed">
+                <p className="text-slate-600 text-sm leading-relaxed">
                   Empowering global enterprises with next-gen financial intelligence, automated auditing, and strategic foresight.
                 </p>
             </div>
@@ -107,7 +107,7 @@ export default function Footer({ logo }) {
                     required
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="bg-white/5 border border-white/10 rounded-l-lg px-4 py-2.5 text-sm text-white w-full md:w-64 focus:outline-none focus:border-blue-500 transition"
+                    className="bg-white border border-slate-300 rounded-l-lg px-4 py-2.5 text-sm text-slate-900 w-full md:w-64 focus:outline-none focus:border-blue-500 transition placeholder:text-slate-400"
                     disabled={status === "sending" || status === "success"}
                   />
                   <button 
@@ -129,11 +129,11 @@ export default function Footer({ logo }) {
           {/* COLUMN 1: Company & Resources */}
           <div className="space-y-8">
             <div>
-                <h3 className="text-white font-bold text-lg mb-4 border-l-4 border-blue-500 pl-3">Company</h3>
+                <h3 className="text-slate-900 font-bold text-lg mb-4 border-l-4 border-blue-500 pl-3">Company</h3>
                 <ul className="space-y-3 text-sm">
                   {companyLinks.map((item) => (
                     <li key={item.name}>
-                      <Link to={item.path} className="hover:text-blue-400 transition-colors block">
+                      <Link to={item.path} className="hover:text-blue-600 transition-colors block">
                         {item.name}
                       </Link>
                     </li>
@@ -141,11 +141,11 @@ export default function Footer({ logo }) {
                 </ul>
             </div>
             <div>
-                <h3 className="text-white font-bold text-lg mb-4 border-l-4 border-purple-500 pl-3">Resources</h3>
+                <h3 className="text-slate-900 font-bold text-lg mb-4 border-l-4 border-purple-500 pl-3">Resources</h3>
                 <ul className="space-y-3 text-sm">
                   {resourceLinks.map((item) => (
                     <li key={item.name}>
-                      <Link to={item.path} className="hover:text-blue-400 transition-colors block text-blue-300">
+                      <Link to={item.path} className="hover:text-blue-600 transition-colors block text-blue-600 font-medium">
                         {item.name} →
                       </Link>
                     </li>
@@ -156,11 +156,11 @@ export default function Footer({ logo }) {
 
           {/* COLUMN 2: Services */}
           <div>
-            <h3 className="text-white font-bold text-lg mb-6 border-l-4 border-blue-500 pl-3">Services</h3>
+            <h3 className="text-slate-900 font-bold text-lg mb-6 border-l-4 border-blue-500 pl-3">Services</h3>
             <ul className="space-y-3 text-sm">
               {serviceLinks.map((item) => (
                 <li key={item.name}>
-                  <Link to={item.path} className="hover:text-blue-400 transition-colors block">
+                  <Link to={item.path} className="hover:text-blue-600 transition-colors block">
                     {item.name}
                   </Link>
                 </li>
@@ -171,11 +171,11 @@ export default function Footer({ logo }) {
           {/* COLUMN 3: Solutions & Useful Links */}
           <div className="space-y-8">
             <div>
-                <h3 className="text-white font-bold text-lg mb-6 border-l-4 border-blue-500 pl-3">Solutions</h3>
+                <h3 className="text-slate-900 font-bold text-lg mb-6 border-l-4 border-blue-500 pl-3">Solutions</h3>
                 <ul className="space-y-3 text-sm">
                   {solutionLinks.map((item) => (
                     <li key={item.name}>
-                      <Link to={item.path} className="hover:text-blue-400 transition-colors block">
+                      <Link to={item.path} className="hover:text-blue-600 transition-colors block">
                         {item.name}
                       </Link>
                     </li>
@@ -183,11 +183,11 @@ export default function Footer({ logo }) {
                 </ul>
             </div>
             <div>
-                <h3 className="text-white font-bold text-lg mb-4 border-l-4 border-green-500 pl-3">Useful Links</h3>
+                <h3 className="text-slate-900 font-bold text-lg mb-4 border-l-4 border-green-500 pl-3">Useful Links</h3>
                 <ul className="space-y-3 text-sm">
                   {usefulLinks.map((item) => (
                     <li key={item.name}>
-                      <Link to={item.path} className="hover:text-blue-400 transition-colors block flex items-center gap-2">
+                      <Link to={item.path} className="hover:text-blue-600 transition-colors block flex items-center gap-2">
                         <FileText size={14} /> {item.name}
                       </Link>
                     </li>
@@ -199,18 +199,18 @@ export default function Footer({ logo }) {
           {/* COLUMN 4: Others (Contact & Legal) */}
           <div className="space-y-8">
             <div>
-                <h3 className="text-white font-bold text-lg mb-6 border-l-4 border-blue-500 pl-3">Others</h3>
+                <h3 className="text-slate-900 font-bold text-lg mb-6 border-l-4 border-blue-500 pl-3">Others</h3>
                 <ul className="space-y-3 text-sm">
                   {otherLinks.map((item) => (
                     <li key={item.name}>
                         {item.external ? (
-                            <a href={item.path} target="_blank" rel="noreferrer" className="hover:text-blue-400 transition-colors flex items-center gap-2 group">
-                                {item.icon && <item.icon size={14} className="text-slate-500 group-hover:text-blue-400" />}
+                            <a href={item.path} target="_blank" rel="noreferrer" className="hover:text-blue-600 transition-colors flex items-center gap-2 group">
+                                {item.icon && <item.icon size={14} className="text-slate-500 group-hover:text-blue-600" />}
                                 {item.name}
                             </a>
                         ) : (
-                            <Link to={item.path} className="hover:text-blue-400 transition-colors flex items-center gap-2 group">
-                                {item.icon && <item.icon size={14} className="text-slate-500 group-hover:text-blue-400" />}
+                            <Link to={item.path} className="hover:text-blue-600 transition-colors flex items-center gap-2 group">
+                                {item.icon && <item.icon size={14} className="text-slate-500 group-hover:text-blue-600" />}
                                 {item.name}
                             </Link>
                         )}
@@ -219,11 +219,11 @@ export default function Footer({ logo }) {
                 </ul>
             </div>
             
-            <div className="pt-4 border-t border-white/5">
+            <div className="pt-4 border-t border-slate-300">
                 <ul className="space-y-2 text-xs text-slate-500">
                     {legalLinks.map((item) => (
                         <li key={item.name}>
-                            <Link to={item.path} className="hover:text-slate-300 transition-colors">
+                            <Link to={item.path} className="hover:text-slate-800 transition-colors">
                                 {item.name}
                             </Link>
                         </li>
@@ -235,11 +235,11 @@ export default function Footer({ logo }) {
         </div>
 
         {/* BOTTOM COPYRIGHT & SOCIALS */}
-        <div className="mt-20 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-slate-500">
-          <p>&copy; {currentYear} XpertAI Global. All rights reserved.</p>
+        <div className="mt-20 pt-8 border-t border-slate-300 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-slate-500">
+          <p>© {currentYear} XpertAI Global. All rights reserved.</p>
           <div className="flex gap-4">
               {[Facebook, Twitter, Linkedin, Instagram].map((Icon, i) => (
-                <a key={i} href="#" className="bg-white/5 hover:bg-blue-600 p-2 rounded-full text-white transition-all hover:-translate-y-1">
+                <a key={i} href="#" className="bg-white hover:bg-blue-600 p-2 rounded-full text-slate-600 hover:text-white transition-all hover:-translate-y-1 shadow-sm">
                   <Icon size={16} />
                 </a>
               ))}

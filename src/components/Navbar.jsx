@@ -15,7 +15,7 @@ export default function Navbar({ logo }) {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // --- Body Lock (Prevent scroll when menu is open) ---
+  // --- Body Lock ---
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = "hidden"; 
@@ -42,9 +42,9 @@ export default function Navbar({ logo }) {
         transition={{ duration: 0.6, type: "spring" }}
         className={`fixed top-0 w-full z-[60] transition-all duration-300 border-b border-transparent ${
           isOpen 
-            ? "bg-slate-900 border-white/10" 
+            ? "bg-white border-slate-200" 
             : scrolled 
-              ? "bg-slate-900/90 backdrop-blur-xl border-white/10 shadow-2xl py-3" 
+              ? "bg-white/90 backdrop-blur-xl border-slate-200 shadow-sm py-3" 
               : "bg-transparent py-4 md:py-5"
         }`}
       >
@@ -64,15 +64,15 @@ export default function Navbar({ logo }) {
                 whileHover={{ scale: 1.05 }}
                 className="text-xl md:text-2xl font-extrabold tracking-tighter flex items-center gap-2"
               >
-                <span className="bg-gradient-to-r from-blue-400 to-purple-500 text-transparent bg-clip-text drop-shadow-lg">
+                <span className="bg-gradient-to-r from-blue-600 to-purple-600 text-transparent bg-clip-text drop-shadow-sm">
                   XpertAI
                 </span>
-                <span className="text-white">Global</span>
+                <span className="text-slate-900">Global</span>
               </motion.div>
             )}
           </Link>
 
-          {/* DESKTOP MENU (Hidden on Mobile) */}
+          {/* DESKTOP MENU */}
           <div className="hidden lg:flex items-center gap-8">
             {mainLinks.map((link) => (
               <Link 
@@ -81,11 +81,11 @@ export default function Navbar({ logo }) {
                 className="relative group py-2"
               >
                 <span className={`text-sm font-medium transition-colors duration-300 ${
-                  location.pathname === link.path ? "text-blue-400" : "text-slate-300 group-hover:text-white"
+                  location.pathname === link.path ? "text-blue-600" : "text-slate-600 group-hover:text-slate-900"
                 }`}>
                   {link.name}
                 </span>
-                <span className={`absolute bottom-0 left-0 h-0.5 bg-blue-500 transition-all duration-300 shadow-[0_0_10px_#3b82f6] ${
+                <span className={`absolute bottom-0 left-0 h-0.5 bg-blue-600 transition-all duration-300 shadow-[0_0_10px_#3b82f6] ${
                   location.pathname === link.path ? "w-full" : "w-0 group-hover:w-full"
                 }`}></span>
               </Link>
@@ -93,9 +93,9 @@ export default function Navbar({ logo }) {
 
             <Link to="/contact">
               <motion.button
-                whileHover={{ scale: 1.05, boxShadow: "0px 0px 25px rgba(59, 130, 246, 0.6)" }}
+                whileHover={{ scale: 1.05, boxShadow: "0px 0px 20px rgba(59, 130, 246, 0.4)" }}
                 whileTap={{ scale: 0.95 }}
-                className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-2.5 rounded-full font-bold text-sm border border-white/20 shadow-lg ml-2"
+                className="bg-slate-900 text-white px-6 py-2.5 rounded-full font-bold text-sm shadow-lg ml-2 hover:bg-slate-800 transition-colors"
               >
                 Get Started
               </motion.button>
@@ -104,11 +104,11 @@ export default function Navbar({ logo }) {
 
           {/* MOBILE TOGGLE BUTTON */}
           <button 
-            className="lg:hidden text-white p-2 relative focus:outline-none hover:bg-white/10 rounded-lg transition-colors"
+            className="lg:hidden p-2 relative focus:outline-none hover:bg-slate-100 rounded-lg transition-colors"
             onClick={() => setIsOpen(!isOpen)}
             aria-label="Toggle Menu"
           >
-            {isOpen ? <X size={28} className="text-red-400" /> : <Menu size={28} />}
+            {isOpen ? <X size={28} className="text-slate-800" /> : <Menu size={28} className="text-slate-800" />}
           </button>
         </div>
       </motion.nav>
@@ -121,10 +121,10 @@ export default function Navbar({ logo }) {
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: "100%" }}
             transition={{ type: "tween", duration: 0.3 }}
-            className="fixed inset-0 bg-slate-900 z-[50] lg:hidden flex flex-col pt-24 px-6 pb-10 overflow-y-auto"
+            className="fixed inset-0 bg-white z-[50] lg:hidden flex flex-col pt-24 px-6 pb-10 overflow-y-auto"
           >
             <div className="flex flex-col space-y-2">
-              <div className="text-xs font-bold text-slate-500 uppercase tracking-widest mb-4">Menu</div>
+              <div className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-4">Menu</div>
               
               {mainLinks.map((link, idx) => (
                 <motion.div
@@ -138,8 +138,8 @@ export default function Navbar({ logo }) {
                     onClick={() => setIsOpen(false)}
                     className={`flex items-center justify-between p-4 rounded-xl text-lg font-medium transition-all border border-transparent ${
                       location.pathname === link.path 
-                        ? "bg-blue-600/20 text-blue-400 border-blue-500/30" 
-                        : "text-slate-300 hover:bg-white/5 hover:text-white"
+                        ? "bg-blue-50 text-blue-600 border-blue-100" 
+                        : "text-slate-600 hover:bg-slate-50 hover:text-slate-900"
                     }`}
                   >
                     {link.name}
@@ -152,12 +152,12 @@ export default function Navbar({ logo }) {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.3 }}
-                className="mt-8 pt-8 border-t border-white/10"
+                className="mt-8 pt-8 border-t border-slate-100"
               >
                 <Link 
                   to="/contact" 
                   onClick={() => setIsOpen(false)}
-                  className="block w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white text-center py-4 rounded-xl font-bold text-lg shadow-lg active:scale-95 transition-transform"
+                  className="block w-full bg-slate-900 text-white text-center py-4 rounded-xl font-bold text-lg shadow-lg active:scale-95 transition-transform"
                 >
                   Get Started Now
                 </Link>

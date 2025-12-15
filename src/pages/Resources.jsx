@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom"; // Link import for navigation
+import { Link } from "react-router-dom"; 
 import { getResourcesPageData } from "../api";
 import { motion } from "framer-motion";
 import { 
@@ -23,30 +23,32 @@ export default function Resources() {
       });
   }, []);
 
-  if (loading) return <div className="h-screen flex items-center justify-center">Loading Resources...</div>;
+  if (loading) return <div className="h-screen flex items-center justify-center bg-white text-slate-600">Loading Resources...</div>;
 
   const { hero, titles, latest_blogs, case_studies, downloads, useful_links } = data || {};
 
   return (
-    <div className="min-h-screen bg-slate-50 overflow-x-hidden">
+    <div className="min-h-screen bg-slate-50 overflow-x-hidden font-sans">
       
-      {/* 1. HERO SECTION */}
-      <div className="bg-slate-900 text-white pt-40 pb-32 text-center px-6 relative overflow-hidden">
-        <div className="absolute top-0 left-0 w-full h-full opacity-10 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]"></div>
+      {/* 1. HERO SECTION - LIGHT THEME */}
+      <div className="bg-slate-50 text-slate-900 pt-40 pb-32 text-center px-6 relative overflow-hidden">
+        <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-5"></div>
+        <div className="absolute top-0 right-0 w-96 h-96 bg-blue-100 rounded-full blur-3xl opacity-50 -translate-y-1/2 translate-x-1/2"></div>
+
         <motion.h1 
           initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }}
-          className="text-4xl md:text-6xl font-bold mb-6 relative z-10"
+          className="text-4xl md:text-6xl font-bold mb-6 relative z-10 text-slate-900"
         >
           {hero?.title || "Knowledge Hub"}
         </motion.h1>
-        <p className="text-xl text-slate-300 max-w-2xl mx-auto relative z-10">
+        <p className="text-xl text-slate-600 max-w-2xl mx-auto relative z-10">
           {hero?.subtitle || "Insights, templates, and tools to empower your financial journey."}
         </p>
       </div>
 
       <div className="max-w-7xl mx-auto px-6 py-20 space-y-24">
         
-        {/* --- SECTION 1: LATEST BLOGS (New) --- */}
+        {/* --- SECTION 1: LATEST BLOGS --- */}
         {latest_blogs?.length > 0 && (
             <section>
                 <div className="flex justify-between items-end mb-10">
@@ -73,11 +75,11 @@ export default function Resources() {
                             className="bg-white rounded-xl shadow-md border border-slate-100 overflow-hidden flex flex-col h-full group"
                         >
                             {/* Image Area */}
-                            <div className="h-40 bg-slate-200 overflow-hidden relative">
+                            <div className="h-40 bg-slate-100 overflow-hidden relative">
                                 {blog.image ? (
                                     <img src={blog.image} alt={blog.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
                                 ) : (
-                                    <div className="w-full h-full flex items-center justify-center text-slate-400 bg-slate-100">
+                                    <div className="w-full h-full flex items-center justify-center text-slate-400 bg-slate-50">
                                         <Newspaper size={32} />
                                     </div>
                                 )}
@@ -131,7 +133,7 @@ export default function Resources() {
                   className="bg-white p-8 rounded-2xl shadow-lg border-l-4 border-blue-500 hover:shadow-xl transition-shadow relative overflow-hidden group"
                 >
                   <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
-                      <FileText size={100} />
+                      <FileText size={100} className="text-slate-400" />
                   </div>
 
                   <div className="flex justify-between items-start mb-4 relative z-10">
@@ -162,7 +164,7 @@ export default function Resources() {
           </section>
         )}
 
-        {/* --- SECTION 3: DOWNLOADS (TEMPLATES) --- */}
+        {/* --- SECTION 3: DOWNLOADS --- */}
         {downloads?.length > 0 && (
           <section>
             <div className="flex items-center gap-3 mb-10">

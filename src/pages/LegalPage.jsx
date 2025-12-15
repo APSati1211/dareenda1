@@ -24,14 +24,14 @@ export default function LegalPage({ slug }) {
   }, [slug]);
 
   if (loading) return (
-    <div className="h-screen flex flex-col items-center justify-center bg-slate-50 gap-3">
+    <div className="h-screen flex flex-col items-center justify-center bg-white gap-3">
         <Loader2 size={40} className="text-blue-600 animate-spin" />
         <p className="text-slate-500 font-medium">Loading Policy...</p>
     </div>
   );
 
   if (error || !data) return (
-    <div className="h-screen flex flex-col items-center justify-center bg-slate-50 gap-4">
+    <div className="h-screen flex flex-col items-center justify-center bg-white gap-4">
         <AlertCircle size={48} className="text-red-500" />
         <h2 className="text-2xl font-bold text-slate-800">Page Not Found</h2>
         <Link to="/" className="text-blue-600 hover:underline flex items-center gap-2">
@@ -43,29 +43,30 @@ export default function LegalPage({ slug }) {
   return (
     <div className="min-h-screen bg-slate-50 font-sans">
       
-      {/* 1. HERO HEADER */}
-      <div className="relative bg-slate-900 text-white pt-40 pb-32 px-6 text-center overflow-hidden">
-        <div className="absolute top-0 left-0 w-full h-full opacity-10 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]"></div>
-        {/* Animated Blobs */}
-        <div className="absolute -top-20 -right-20 w-96 h-96 bg-blue-600/30 rounded-full blur-[100px] animate-pulse"></div>
-        <div className="absolute bottom-0 left-10 w-64 h-64 bg-purple-600/20 rounded-full blur-[80px]"></div>
+      {/* 1. HERO HEADER - LIGHT THEME */}
+      <div className="relative bg-slate-50 text-slate-900 pt-40 pb-32 px-6 text-center overflow-hidden">
+        <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-5"></div>
+        
+        {/* Animated Blobs - Light */}
+        <div className="absolute -top-20 -right-20 w-96 h-96 bg-blue-100/50 rounded-full blur-[100px] animate-pulse"></div>
+        <div className="absolute bottom-0 left-10 w-64 h-64 bg-purple-100/50 rounded-full blur-[80px]"></div>
 
         <motion.div 
             initial={{ opacity: 0, y: 20 }} 
             animate={{ opacity: 1, y: 0 }}
             className="relative z-10 max-w-4xl mx-auto"
         >
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-500/20 border border-blue-500/30 text-blue-300 text-xs font-bold uppercase tracking-wider mb-6 backdrop-blur-sm">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white border border-slate-200 text-blue-600 text-xs font-bold uppercase tracking-wider mb-6 shadow-sm">
                 <ShieldCheck size={14} /> Official Document
             </div>
 
-            <h1 className="text-4xl md:text-6xl font-extrabold mb-6 tracking-tight leading-tight">
+            <h1 className="text-4xl md:text-6xl font-extrabold mb-6 tracking-tight leading-tight text-slate-900">
               {data.title}
             </h1>
             
-            <div className="flex items-center justify-center gap-2 text-slate-400 text-sm">
+            <div className="flex items-center justify-center gap-2 text-slate-500 text-sm">
                 <Calendar size={16} />
-                <span>Last Updated: <span className="text-white font-medium">{new Date(data.last_updated).toLocaleDateString()}</span></span>
+                <span>Last Updated: <span className="text-slate-900 font-medium">{new Date(data.last_updated).toLocaleDateString()}</span></span>
             </div>
         </motion.div>
       </div>
@@ -98,7 +99,7 @@ export default function LegalPage({ slug }) {
                         className="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden hover:shadow-md transition-shadow duration-300"
                     >
                         {/* Section Header */}
-                        <div className="bg-slate-50/50 p-6 border-b border-slate-100 flex items-start gap-4">
+                        <div className="bg-slate-50 p-6 border-b border-slate-100 flex items-start gap-4">
                             <div className="bg-blue-100 text-blue-600 w-8 h-8 rounded-lg flex items-center justify-center font-bold text-sm shrink-0 mt-0.5">
                                 {index + 1}
                             </div>
@@ -108,7 +109,6 @@ export default function LegalPage({ slug }) {
                         {/* Section Content */}
                         <div className="p-6 md:p-8">
                             <article className="prose prose-slate max-w-none prose-p:text-slate-600 prose-p:leading-relaxed prose-a:text-blue-600">
-                                {/* Agar content me line breaks hain to unhe preserve karne ke liye */}
                                 <div className="whitespace-pre-line">{section.content}</div>
                             </article>
                         </div>

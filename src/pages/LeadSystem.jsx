@@ -21,7 +21,7 @@ export default function LeadSystem() {
       });
   }, []);
 
-  if (loading) return <div className="h-screen flex items-center justify-center">Loading...</div>;
+  if (loading) return <div className="h-screen flex items-center justify-center bg-white text-slate-600">Loading...</div>;
 
   const { hero, features, dashboard, cta } = data || {};
 
@@ -31,20 +31,20 @@ export default function LeadSystem() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 pb-20">
+    <div className="min-h-screen bg-slate-50 pb-20 font-sans">
       
-      {/* Hero Section */}
-      <div className="relative bg-slate-900 text-white pt-32 pb-24 text-center px-6 overflow-hidden">
-        <div className="absolute top-0 left-0 w-full h-full bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-20"></div>
+      {/* Hero Section - LIGHT THEME */}
+      <div className="relative bg-slate-50 text-slate-900 pt-32 pb-24 text-center px-6 overflow-hidden">
+        <div className="absolute top-0 left-0 w-full h-full bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-5"></div>
         
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="relative z-10 max-w-4xl mx-auto">
-          <span className="inline-block py-1 px-3 rounded-full bg-blue-500/20 border border-blue-500/30 text-blue-300 text-sm font-semibold mb-6">
+          <span className="inline-block py-1 px-3 rounded-full bg-blue-50 border border-blue-200 text-blue-600 text-sm font-semibold mb-6 shadow-sm">
             CRM & Automation
           </span>
-          <h1 className="text-5xl md:text-6xl font-bold mb-6 leading-tight">
+          <h1 className="text-5xl md:text-6xl font-bold mb-6 leading-tight text-slate-900">
             {hero?.title}
           </h1>
-          <p className="text-xl text-slate-300 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-xl text-slate-600 max-w-2xl mx-auto leading-relaxed">
             {hero?.subtitle}
           </p>
         </motion.div>
@@ -62,7 +62,7 @@ export default function LeadSystem() {
               whileHover={{ y: -10 }}
               className="bg-white p-8 rounded-2xl shadow-xl border-t-4 border-blue-500 hover:shadow-2xl transition-all"
             >
-              <div className="w-16 h-16 bg-blue-50 rounded-2xl flex items-center justify-center text-blue-600 mb-6 shadow-sm">
+              <div className="w-16 h-16 bg-blue-50 rounded-2xl flex items-center justify-center text-blue-600 mb-6 shadow-sm border border-blue-100">
                 {renderIcon(item.icon_name)}
               </div>
               <h3 className="text-2xl font-bold text-slate-800 mb-3">{item.title}</h3>

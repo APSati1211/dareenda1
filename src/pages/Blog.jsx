@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom"; // <--- Import Link
+import { Link } from "react-router-dom"; 
 import { getBlogs, getCategories } from "../api"; 
 import { motion } from "framer-motion";
 import { Calendar, User, List, Search, ArrowRight } from "lucide-react"; 
@@ -45,17 +45,17 @@ export default function Blog() {
   const currentFilterName = categories.find(cat => cat.slug === selectedCategory)?.name;
 
   return (
-    <div className="min-h-screen bg-slate-50 pb-20">
+    <div className="min-h-screen bg-slate-50 pb-20 font-sans">
       
-      {/* Hero Section */}
-      <div className="bg-slate-900 text-white py-24 text-center px-6">
-        <h1 className="text-5xl font-bold mb-4">{getField("hero_title", "title") || "Latest Insights"}</h1>
+      {/* Hero Section - LIGHT THEME */}
+      <div className="bg-slate-50 text-slate-900 py-24 text-center px-6 border-b border-slate-200">
+        <h1 className="text-5xl font-bold mb-4 text-slate-900">{getField("hero_title", "title") || "Latest Insights"}</h1>
         {searchQuery ? (
-            <p className="text-blue-400 font-semibold text-lg mb-2">Searching for: "{searchQuery}"</p>
+            <p className="text-blue-600 font-semibold text-lg mb-2">Searching for: "{searchQuery}"</p>
         ) : selectedCategory ? (
-            <p className="text-blue-400 font-semibold text-lg mb-2">Filtered by: {currentFilterName}</p>
+            <p className="text-blue-600 font-semibold text-lg mb-2">Filtered by: {currentFilterName}</p>
         ) : (
-            <p className="text-slate-400">{getField("hero_text") || "Trends, news, and expert analysis from XpertAI."}</p>
+            <p className="text-slate-600">{getField("hero_text") || "Trends, news, and expert analysis from XpertAI."}</p>
         )}
       </div>
 
@@ -89,7 +89,7 @@ export default function Blog() {
                 <button
                   onClick={() => setSelectedCategory(null)}
                   className={`w-full text-left py-3 px-4 rounded-lg text-sm font-medium transition-all ${
-                    selectedCategory === null ? 'bg-slate-800 text-white shadow-md' : 'hover:bg-gray-100 text-slate-600'
+                    selectedCategory === null ? 'bg-slate-900 text-white shadow-md' : 'hover:bg-gray-100 text-slate-600'
                   }`}
                 >
                   All Articles
@@ -147,7 +147,7 @@ export default function Blog() {
                       {blog.image ? (
                           <img src={blog.image} alt={blog.title} className="w-full h-full object-cover group-hover:scale-110 transition duration-700" />
                       ) : (
-                          <div className="w-full h-full bg-slate-200 flex items-center justify-center text-slate-400">No Image</div>
+                          <div className="w-full h-full bg-slate-100 flex items-center justify-center text-slate-400">No Image</div>
                       )}
                       <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition duration-500"></div>
                   </Link>

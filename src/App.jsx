@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { motion } from "framer-motion";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
@@ -5,7 +6,7 @@ import Chatbot from "./components/Chatbot";
 import ScrollToTop from "./components/ScrollToTop"; 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-// 📄 Pages (Same imports)
+// 📄 Pages
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Services from "./pages/Services";  
@@ -18,20 +19,16 @@ import Careers from "./pages/Careers";
 import ServiceDetail from "./pages/ServiceDetail";
 import LegalPage from "./pages/LegalPage";
 import Solutions from "./pages/Solutions";
+import SolutionDetail from "./pages/SolutionDetail"; // 👈 IMPORT THIS
 
 function App() {
-  // Theme state aur useEffect hata diya gaya hai.
-  // Ab website seedha CSS variables use karegi.
-
   return (
     <Router>
       <ScrollToTop />
 
       <div className="bg-light min-h-screen flex flex-col">
-        {/* Logo prop hata diya, ab default text logo dikhega */}
         <Navbar />
 
-        {/* Routes */}
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
@@ -45,15 +42,18 @@ function App() {
           <Route path="/resources" element={<Resources />} />
           <Route path="/careers" element={<Careers />} />
           <Route path="/services/:slug" element={<ServiceDetail />} />
+          
+          {/* 🔥 SOLUTIONS ROUTES */}
+          <Route path="/solutions" element={<Solutions />} />
+          <Route path="/solutions/:slug" element={<SolutionDetail />} /> {/* 👈 NEW ROUTE */}
+
+          {/* --- LEGAL PAGES --- */}
           <Route path="/terms-and-conditions" element={<LegalPage slug="terms-and-conditions" />} />
           <Route path="/privacy-policy" element={<LegalPage slug="privacy-policy" />} />
-          <Route path="/solutions" element={<Solutions />} />
+          <Route path="/refund-policy" element={<LegalPage slug="refund-policy" />} /> 
         </Routes>
 
-        {/* Footer */}
         <Footer />
-        
-        {/* Chatbot */}
         <Chatbot />
       </div>
     </Router>

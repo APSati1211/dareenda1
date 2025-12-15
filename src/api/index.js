@@ -80,8 +80,10 @@ export const getServiceBySlug = (slug) => API.get(`services/${slug}/`);
 
 // --- 7. Stakeholders (Updated) ---
 export const getStakeholders = () => API.get("stakeholders/");
-export const getSolutionsPageData = () => API.get("solutions-page-data/"); // NEW FUNCTION
+export const getSolutionsPageData = () => API.get("solutions-page-data/");
+// NEW FUNCTION ADDED BELOW:
+export const getSolutionBySlug = (slug) => API.get(`solutions/${slug}/`);
 
-// --- 8. Theme & Chatbot ---
+// --- 8. Theme & Chatbot ---   
 export const getThemeSettings = () => API.get("theme-settings/"); 
 export const chatFlowHandler = (data) => API.post("chatbot-flow/", data);

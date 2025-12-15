@@ -39,7 +39,7 @@ export default function Solutions() {
   return (
     <div className="min-h-screen bg-slate-50 overflow-x-hidden selection:bg-blue-500 selection:text-white">
       
-      {/* 1. HERO SECTION (Redesigned) */}
+      {/* 1. HERO SECTION */}
       <div className="relative bg-slate-900 text-white pt-48 pb-40 px-6 text-center overflow-hidden">
         
         {/* Animated Background Elements */}
@@ -81,7 +81,7 @@ export default function Solutions() {
         </motion.div>
       </div>
 
-      {/* 2. SOLUTIONS GRID (Glassmorphism Cards) */}
+      {/* 2. SOLUTIONS GRID */}
       <div id="cards-grid" className="max-w-7xl mx-auto px-6 -mt-24 relative z-20 pb-24">
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           
@@ -112,7 +112,6 @@ export default function Solutions() {
                 </p>
                 
                 <ul className="space-y-3 mb-8">
-                  {/* Mock Features list for visual density */}
                   <li className="flex items-center gap-2 text-sm text-slate-500">
                     <CheckCircle2 size={16} className="text-green-500" /> Dedicated Dashboard
                   </li>
@@ -121,14 +120,12 @@ export default function Solutions() {
                   </li>
                 </ul>
 
-                {/* UPDATED LINK: Changed from "/register" to "/contact" 
-                   Also added logic to use 'card.link' if it exists in your API data 
-                */}
+                {/* 🔥 UPDATED LINK: Now pointing to dynamic slug */}
                 <Link 
-                    to={card.link || "/contact"} 
+                    to={`/solutions/${card.slug}`} 
                     className="inline-flex items-center text-slate-900 font-bold group-hover:text-blue-600 transition-colors mt-auto"
                 >
-                    Get Started <ArrowRight size={18} className="ml-2 group-hover:translate-x-1 transition-transform" />
+                    Learn More <ArrowRight size={18} className="ml-2 group-hover:translate-x-1 transition-transform" />
                 </Link>
               </div>
             </motion.div>
@@ -137,10 +134,9 @@ export default function Solutions() {
         </div>
       </div>
 
-      {/* 3. CTA SECTION (Dark Modern) */}
+      {/* 3. CTA SECTION */}
       <section className="max-w-6xl mx-auto px-6 pb-24">
           <div className="relative bg-slate-900 rounded-[2.5rem] p-12 md:p-20 overflow-hidden text-center shadow-2xl">
-              {/* Abstract shapes */}
               <div className="absolute top-0 left-0 w-64 h-64 bg-blue-600/20 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2"></div>
               <div className="absolute bottom-0 right-0 w-64 h-64 bg-purple-600/20 rounded-full blur-3xl translate-x-1/2 translate-y-1/2"></div>
               <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-20 mix-blend-overlay"></div>
@@ -160,7 +156,6 @@ export default function Solutions() {
                       <Link to="/contact" className="bg-transparent border border-white/20 text-white px-8 py-4 rounded-xl font-bold hover:bg-white/10 transition backdrop-blur-sm">
                           Contact Sales
                       </Link>
-                      {/* LEAD SYSTEM LINK */}
                       <Link to="/lead-system" className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-8 py-4 rounded-xl font-bold hover:shadow-lg hover:shadow-blue-600/40 transition border border-white/10">
                           Explore Lead System
                       </Link>

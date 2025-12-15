@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import * as LucideIcons from "lucide-react";
 import { 
   MapPin, Clock, Briefcase, X, CheckCircle, 
-  Loader2, ArrowRight, Filter, Search, FileText, ChevronRight 
+  Loader2, ArrowRight, Filter, Search, ChevronRight, UploadCloud 
 } from "lucide-react";
 
 export default function Careers() {
@@ -119,7 +119,7 @@ export default function Careers() {
                     <p>{content?.culture_text}</p>
                 </div>
                 
-                {/* Testimonials Carousel (Simplified List) */}
+                {/* Testimonials Carousel */}
                 <div className="space-y-6">
                     {testimonials?.map((t) => (
                         <div key={t.id} className="bg-slate-50 p-6 rounded-2xl border border-slate-100 flex gap-4">
@@ -264,9 +264,17 @@ export default function Careers() {
   );
 }
 
-// --- ENHANCED MODAL COMPONENT ---
+// --- UPDATED MODAL COMPONENT ---
 function ApplicationModal({ job, isOpen, mode, setMode, onClose }) {
-  const [form, setForm] = useState({ applicant_name: "", email: "", phone: "", linkedin_url: "", resume_link: "", cover_letter: "" });
+  const [form, setForm] = useState({ 
+      applicant_name: "", 
+      email: "", 
+      phone: "", 
+      linkedin_url: "", 
+      resume_link: "", 
+      resume_file: null, 
+      cover_letter: "" 
+  });
   const [status, setStatus] = useState("idle");
 
   if (!isOpen || !job) return null;
@@ -275,13 +283,45 @@ function ApplicationModal({ job, isOpen, mode, setMode, onClose }) {
     e.preventDefault();
     setStatus("sending");
     try {
-      await applyForJob({ ...form, job: job.id });
+      const formData = new FormData();
+      formData.append("job", job.id);
+      formData.append("applicant_name", form.applicant_name);
+      formData.append("email", form.email);
+      formData.append("phone", form.phone);
+      formData.append("linkedin_url", form.linkedin_url);
+      formData.append("resume_link", form.resume_link);
+      formData.append("cover_letter", form.cover_letter);
+      
+      if (form.resume_file) {
+          formData.append("resume_file", form.resume_file);
+      }
+
+      await applyForJob(formData);
+      
       setStatus("success");
-      setTimeout(() => { onClose(); setStatus("idle"); setForm({ applicant_name: "", email: "", phone: "", linkedin_url: "", resume_link: "", cover_letter: "" }); }, 3000);
+      setTimeout(() => { 
+          onClose(); 
+          setStatus("idle"); 
+          setForm({ 
+              applicant_name: "", 
+              email: "", 
+              phone: "", 
+              linkedin_url: "", 
+              resume_link: "", 
+              resume_file: null, 
+              cover_letter: "" 
+          }); 
+      }, 3000);
     } catch (error) {
       console.error(error);
       setStatus("error");
     }
+  };
+
+  const handleFileChange = (e) => {
+      if (e.target.files && e.target.files[0]) {
+          setForm({ ...form, resume_file: e.target.files[0] });
+      }
   };
 
   return (
@@ -293,29 +333,48 @@ function ApplicationModal({ job, isOpen, mode, setMode, onClose }) {
       >
         <motion.div 
           initial={{ scale: 0.95, opacity: 0, y: 20 }} animate={{ scale: 1, opacity: 1, y: 0 }} exit={{ scale: 0.95, opacity: 0, y: 20 }}
-          className="bg-white rounded-2xl shadow-2xl w-full max-w-5xl overflow-hidden max-h-[90vh] flex flex-col md:flex-row"
+          className="bg-white rounded-2xl shadow-2xl w-full max-w-5xl overflow-hidden max-h-[90vh] flex flex-col md:flex-row relative"
           onClick={e => e.stopPropagation()}
         >
-            {/* LEFT SIDE: JOB DETAILS */}
-            <div className={`w-full md:w-1/2 bg-slate-50 p-8 overflow-y-auto border-b md:border-b-0 md:border-r border-slate-200 ${mode === 'apply' ? 'hidden md:block' : 'block'}`}>
-                <div className="sticky top-0 bg-slate-50 pb-4 z-10">
-                    <span className="text-blue-600 font-bold text-xs uppercase tracking-wider">{job.department}</span>
-                    <h2 className="text-2xl font-bold text-slate-900 mt-1">{job.title}</h2>
-                    <div className="flex flex-wrap gap-3 mt-3 text-sm text-slate-500">
-                        <span className="flex items-center gap-1"><MapPin size={14}/> {job.location}</span>
-                        <span className="flex items-center gap-1"><Clock size={14}/> {job.type}</span>
+            {/* LEFT SIDE: JOB DETAILS (Modified to show Full Width in 'details' mode) */}
+            <div className={`
+                bg-slate-50 p-8 overflow-y-auto border-b md:border-b-0 md:border-r border-slate-200 transition-all duration-300
+                ${mode === 'details' ? 'w-full' : 'hidden md:block md:w-1/2'} 
+            `}>
+                <div className="sticky top-0 bg-slate-50 pb-4 z-10 flex justify-between items-start">
+                    <div>
+                        <span className="text-blue-600 font-bold text-xs uppercase tracking-wider">{job.department}</span>
+                        <h2 className="text-2xl font-bold text-slate-900 mt-1">{job.title}</h2>
+                        <div className="flex flex-wrap gap-3 mt-3 text-sm text-slate-500">
+                            <span className="flex items-center gap-1"><MapPin size={14}/> {job.location}</span>
+                            <span className="flex items-center gap-1"><Clock size={14}/> {job.type}</span>
+                        </div>
                     </div>
+
+                    {/* CTA Button in Details Mode (Top Right) */}
+                    {mode === 'details' && (
+                        <div className="flex items-center gap-3">
+                            <button 
+                                onClick={() => setMode('apply')}
+                                className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2.5 rounded-xl font-bold shadow-lg shadow-blue-200 transition flex items-center gap-2 active:scale-95"
+                            >
+                                Apply Now <ChevronRight size={16} />
+                            </button>
+                            <button onClick={onClose} className="p-2 hover:bg-slate-200 rounded-full transition text-slate-500">
+                                <X size={24} />
+                            </button>
+                        </div>
+                    )}
                 </div>
                 
-                <div className="prose prose-slate prose-sm mt-4 text-slate-600" dangerouslySetInnerHTML={{ __html: job.description }} />
-
-                <div className="mt-8 pt-6 border-t border-slate-200 md:hidden">
-                    <button onClick={() => setMode('apply')} className="w-full bg-blue-600 text-white py-3 rounded-xl font-bold">Apply Now</button>
-                </div>
+                <div className="prose prose-slate prose-sm mt-4 text-slate-600 max-w-none" dangerouslySetInnerHTML={{ __html: job.description }} />
             </div>
 
-            {/* RIGHT SIDE: APPLICATION FORM */}
-            <div className={`w-full md:w-1/2 p-8 overflow-y-auto bg-white ${mode === 'details' ? 'hidden md:block' : 'block'}`}>
+            {/* RIGHT SIDE: APPLICATION FORM (Modified Visibility) */}
+            <div className={`
+                p-8 overflow-y-auto bg-white transition-all duration-300
+                ${mode === 'apply' ? 'w-full md:w-1/2 block' : 'hidden'}
+            `}>
                 <div className="flex justify-between items-center mb-6">
                     <h3 className="text-xl font-bold text-slate-900">Application Form</h3>
                     <button onClick={onClose} className="p-2 hover:bg-slate-100 rounded-full transition"><X size={20} /></button>
@@ -351,11 +410,26 @@ function ApplicationModal({ job, isOpen, mode, setMode, onClose }) {
                             </div>
                         </div>
 
+                        {/* --- FILE UPLOAD (MANDATORY) --- */}
                         <div>
-                            <label className="block text-sm font-semibold text-slate-700 mb-1">Resume Link (Google Drive) *</label>
-                            <input required type="url" className="w-full p-3 bg-slate-50 border border-slate-200 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition"
+                            <label className="block text-sm font-semibold text-slate-700 mb-1">Resume (PDF) *</label>
+                            <div className="relative">
+                                <input 
+                                    required 
+                                    type="file" 
+                                    accept=".pdf"
+                                    onChange={handleFileChange}
+                                    className="w-full p-3 bg-slate-50 border border-slate-200 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
+                                />
+                                <UploadCloud className="absolute right-3 top-3.5 text-slate-400 pointer-events-none" size={20} />
+                            </div>
+                        </div>
+
+                        {/* --- LINK (OPTIONAL) --- */}
+                        <div>
+                            <label className="block text-sm font-semibold text-slate-700 mb-1">Resume Link (Optional)</label>
+                            <input type="url" className="w-full p-3 bg-slate-50 border border-slate-200 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition"
                                 value={form.resume_link} onChange={e => setForm({...form, resume_link: e.target.value})} placeholder="https://drive.google.com/file..." />
-                            <p className="text-xs text-slate-400 mt-1">Make sure the link is publicly accessible.</p>
                         </div>
 
                         <div>

@@ -46,7 +46,7 @@ export default function Home() {
   };
 
   if (loading) return (
-    <div className="h-screen flex items-center justify-center bg-slate-900 text-blue-400 font-mono animate-pulse">
+    <div className="h-screen flex items-center justify-center bg-white text-blue-600 font-mono animate-pulse">
         Initializing XpertAI Global...
     </div>
   );
@@ -61,35 +61,35 @@ export default function Home() {
   ];
 
   return (
-    <div className="bg-slate-50 overflow-x-hidden font-sans">
+    <div className="bg-white overflow-x-hidden font-sans">
       
-      {/* 1. HERO BANNER */}
-      <section className="relative pt-32 pb-20 md:pt-44 md:pb-32 bg-slate-900 text-white overflow-hidden px-4">
-        <div className="absolute top-0 left-0 w-full h-full opacity-20 bg-[url('https://www.transparenttextures.com/patterns/circuit-board.png')]"></div>
-        <div className="absolute top-20 right-0 w-96 h-96 bg-blue-600/30 rounded-full blur-3xl mix-blend-screen animate-blob"></div>
-        <div className="absolute bottom-0 left-20 w-80 h-80 bg-purple-600/20 rounded-full blur-3xl mix-blend-screen animate-blob animation-delay-2000"></div>
+      {/* 1. HERO BANNER - LIGHT THEME */}
+      <section className="relative pt-32 pb-20 md:pt-44 md:pb-32 bg-slate-50 text-slate-900 overflow-hidden px-4">
+        <div className="absolute top-0 left-0 w-full h-full opacity-5 bg-[url('https://www.transparenttextures.com/patterns/circuit-board.png')]"></div>
+        <div className="absolute top-20 right-0 w-96 h-96 bg-blue-200/50 rounded-full blur-3xl mix-blend-multiply animate-blob"></div>
+        <div className="absolute bottom-0 left-20 w-80 h-80 bg-purple-200/50 rounded-full blur-3xl mix-blend-multiply animate-blob animation-delay-2000"></div>
         
         <div className="container mx-auto relative z-10 text-center max-w-5xl">
             <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}>
                 
-                <div className="inline-flex flex-wrap justify-center items-center gap-2 py-1 px-4 rounded-full bg-blue-500/10 border border-blue-500/30 text-blue-300 text-[10px] md:text-sm font-semibold mb-6 md:mb-8 backdrop-blur-md">
+                <div className="inline-flex flex-wrap justify-center items-center gap-2 py-1 px-4 rounded-full bg-blue-50 border border-blue-100 text-blue-600 text-[10px] md:text-sm font-semibold mb-6 md:mb-8">
                     <span className="flex items-center gap-1"><Cpu size={12} /> AI-Powered</span> <span className="opacity-30">|</span> 
                     <span className="flex items-center gap-1"><Bot size={12} /> Automated</span> <span className="opacity-30">|</span> 
                     <span className="flex items-center gap-1"><LinkIcon size={12} /> Blockchain</span>
                 </div>
 
-                <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold mb-4 md:mb-6 leading-tight bg-clip-text text-transparent bg-gradient-to-r from-white via-blue-100 to-slate-400 drop-shadow-sm">
+                <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold mb-4 md:mb-6 leading-tight text-slate-900">
                     {content?.hero_title || "Future of Financial Outsourcing"}
                 </h1>
-                <p className="text-base sm:text-lg md:text-xl text-slate-400 mb-8 md:mb-10 max-w-3xl mx-auto leading-relaxed px-2">
+                <p className="text-base sm:text-lg md:text-xl text-slate-600 mb-8 md:mb-10 max-w-3xl mx-auto leading-relaxed px-2">
                     {content?.hero_subtitle}
                 </p>
                 
                 <div className="flex flex-col sm:flex-row gap-4 justify-center w-full sm:w-auto px-4 sm:px-0">
-                    <Link to="/contact" className="w-full sm:w-auto bg-blue-600 hover:bg-blue-500 text-white px-8 py-4 rounded-full font-bold shadow-lg shadow-blue-600/30 transition-all flex items-center justify-center gap-2 hover:scale-105 active:scale-95 group">
+                    <Link to="/contact" className="w-full sm:w-auto bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-full font-bold shadow-lg shadow-blue-200 transition-all flex items-center justify-center gap-2 hover:scale-105 active:scale-95 group">
                         {content?.hero_cta_text || "Get Started"} <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
                     </Link>
-                    <button onClick={() => document.getElementById('how-it-works').scrollIntoView({ behavior: 'smooth' })} className="w-full sm:w-auto px-8 py-4 rounded-full font-bold border border-slate-600 hover:border-white text-slate-300 hover:text-white transition-all hover:bg-white/5 active:scale-95 flex items-center justify-center gap-2">
+                    <button onClick={() => document.getElementById('how-it-works').scrollIntoView({ behavior: 'smooth' })} className="w-full sm:w-auto px-8 py-4 rounded-full font-bold border border-slate-200 hover:border-slate-400 text-slate-600 hover:text-slate-900 transition-all hover:bg-white active:scale-95 flex items-center justify-center gap-2">
                         How It Works <ArrowDownCircle size={20} />
                     </button>
                 </div>
@@ -108,7 +108,7 @@ export default function Home() {
             {process && process.length > 0 ? (
                 <div className="relative grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 md:gap-4">
                     {/* Connecting Line (Hidden on Mobile) */}
-                    <div className="hidden md:block absolute top-12 left-[12%] w-[76%] h-1 bg-gradient-to-r from-blue-100 via-purple-100 to-blue-100 -z-10"></div>
+                    <div className="hidden md:block absolute top-12 left-[12%] w-[76%] h-1 bg-gradient-to-r from-blue-50 via-purple-50 to-blue-50 -z-10"></div>
 
                     {process.map((step, i) => (
                         <motion.div 
@@ -176,7 +176,7 @@ export default function Home() {
         </section>
       )}
 
-      {/* 3.5. TRUSTED CLIENTS - Redesigned & Sexy */}
+      {/* 3.5. TRUSTED CLIENTS */}
       {clients && clients.length > 0 && (
         <section className="py-20 bg-white relative overflow-hidden">
            {/* Background Decoration */}
@@ -203,9 +203,6 @@ export default function Home() {
                     transition={{ delay: i * 0.1, type: "spring", stiffness: 100 }}
                     className="group relative"
                   >
-                     {/* Hover Glow Effect */}
-                     <div className="absolute -inset-6 bg-gradient-to-tr from-blue-100/30 to-purple-100/30 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                     
                      <div className="relative grayscale opacity-50 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500 ease-out transform group-hover:scale-110 cursor-pointer">
                         {client.logo ? (
                            <img src={client.logo} alt={client.name} className="h-10 md:h-12 w-auto object-contain drop-shadow-sm group-hover:drop-shadow-lg transition-all" />
@@ -222,24 +219,24 @@ export default function Home() {
         </section>
       )}
 
-      {/* 4. AI SERVICE SELECTOR */}
-      <section className="py-16 md:py-24 bg-slate-900 text-white relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-blue-900/40 to-slate-900"></div>
+      {/* 4. AI SERVICE SELECTOR - LIGHT THEME */}
+      <section className="py-16 md:py-24 bg-white border-y border-slate-100 relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-50/50 to-slate-50"></div>
         <div className="container mx-auto px-4 md:px-6 relative z-10">
             <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
                 <div className="text-center lg:text-left">
-                    <span className="text-blue-400 font-bold tracking-wider uppercase text-xs md:text-sm mb-2 block">AI Recommendation Engine</span>
-                    <h2 className="text-3xl md:text-5xl font-bold mb-4 md:mb-6">Not sure where to start?</h2>
-                    <p className="text-slate-300 text-base md:text-lg mb-8 leading-relaxed">
+                    <span className="text-blue-600 font-bold tracking-wider uppercase text-xs md:text-sm mb-2 block">AI Recommendation Engine</span>
+                    <h2 className="text-3xl md:text-5xl font-bold mb-4 md:mb-6 text-slate-900">Not sure where to start?</h2>
+                    <p className="text-slate-600 text-base md:text-lg mb-8 leading-relaxed">
                         Let our AI-powered selector guide you to the perfect financial solution tailored to your role and needs.
                     </p>
-                    <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 text-sm text-slate-400">
-                        <span className="flex items-center gap-2"><CheckCircle size={16} className="text-green-400"/> Instant Match</span>
-                        <span className="flex items-center gap-2"><CheckCircle size={16} className="text-green-400"/> Personalized</span>
+                    <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 text-sm text-slate-500">
+                        <span className="flex items-center gap-2"><CheckCircle size={16} className="text-green-500"/> Instant Match</span>
+                        <span className="flex items-center gap-2"><CheckCircle size={16} className="text-green-500"/> Personalized</span>
                     </div>
                 </div>
 
-                <div className="bg-white text-slate-900 rounded-2xl shadow-2xl p-6 md:p-10 border border-slate-200">
+                <div className="bg-white text-slate-900 rounded-2xl shadow-xl p-6 md:p-10 border border-slate-100">
                     <AnimatePresence mode="wait">
                         {selectorStep === 0 ? (
                             <motion.div key="step0" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }}>
@@ -283,18 +280,18 @@ export default function Home() {
       </section>
 
       {/* 5. TESTIMONIALS & CASE STUDIES */}
-      <section className="py-16 md:py-24 bg-white">
+      <section className="py-16 md:py-24 bg-slate-50">
         <div className="container mx-auto px-4 md:px-6">
              <div className="grid lg:grid-cols-2 gap-12 lg:gap-16">
                 <div>
                     <h3 className="text-xl md:text-2xl font-bold text-slate-900 mb-6 md:mb-8 border-l-4 border-blue-500 pl-4">What Our Clients Say</h3>
                     <div className="space-y-6">
                         {testimonials?.slice(0,2).map((testi, i) => (
-                            <div key={i} className="bg-slate-50 p-6 md:p-8 rounded-2xl relative">
+                            <div key={i} className="bg-white p-6 md:p-8 rounded-2xl relative shadow-sm">
                                 <div className="text-yellow-400 flex mb-4"><Star size={16} fill="currentColor" /><Star size={16} fill="currentColor" /><Star size={16} fill="currentColor" /><Star size={16} fill="currentColor" /><Star size={16} fill="currentColor" /></div>
                                 <p className="text-slate-700 italic mb-6 text-base md:text-lg">"{testi.quote}"</p>
                                 <div className="flex items-center gap-3">
-                                    <div className="w-10 h-10 bg-blue-200 rounded-full flex items-center justify-center text-blue-700 font-bold flex-shrink-0">
+                                    <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center text-blue-700 font-bold flex-shrink-0">
                                         {testi.author_name[0]}
                                     </div>
                                     <div>
@@ -311,8 +308,8 @@ export default function Home() {
                     <h3 className="text-xl md:text-2xl font-bold text-slate-900 mb-6 md:mb-8 border-l-4 border-green-500 pl-4">Success Stories</h3>
                     <div className="space-y-4">
                         {case_studies?.map((study, i) => (
-                            <Link key={i} to="/resources" className="flex items-center gap-4 md:gap-6 p-4 rounded-xl hover:bg-slate-50 transition group border border-transparent hover:border-slate-100">
-                                <div className="w-16 h-16 md:w-20 md:h-20 bg-green-50 rounded-xl flex-shrink-0 flex flex-col items-center justify-center text-green-700 border border-green-100">
+                            <Link key={i} to="/resources" className="flex items-center gap-4 md:gap-6 p-4 rounded-xl hover:bg-white transition group border border-transparent hover:border-slate-100 hover:shadow-sm">
+                                <div className="w-16 h-16 md:w-20 md:h-20 bg-green-100 rounded-xl flex-shrink-0 flex flex-col items-center justify-center text-green-700 border border-green-200">
                                     <span className="font-bold text-lg md:text-xl">{study.result_stat.split(' ')[0]}</span>
                                     <span className="text-[9px] md:text-[10px] uppercase font-semibold">Growth</span>
                                 </div>
@@ -330,7 +327,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 6. QUICK LINKS */}
+      {/* 6. QUICK LINKS - BLUE (Kept as is for contrast) */}
       <section className="py-16 md:py-20 bg-blue-600 text-white relative overflow-hidden">
         <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-20"></div>
         <div className="container mx-auto px-4 md:px-6 text-center relative z-10">
@@ -363,19 +360,19 @@ export default function Home() {
 
       {/* 7. FAQ */}
       {faq && faq.length > 0 && (
-        <section className="py-16 md:py-24 bg-slate-50">
+        <section className="py-16 md:py-24 bg-white">
             <div className="container mx-auto px-4 md:px-6 max-w-3xl">
                 <h2 className="text-2xl md:text-3xl font-bold text-center mb-10 md:mb-12 text-slate-900">{content?.faq_title || "Frequently Asked Questions"}</h2>
                 <div className="space-y-4">
                     {faq.map((item, index) => (
-                        <div key={item.id} className="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
-                            <button onClick={() => setActiveAccordion(activeAccordion === index ? null : index)} className="w-full flex items-center justify-between p-5 md:p-6 text-left font-semibold text-slate-800 hover:bg-slate-50 transition text-sm md:text-base">
+                        <div key={item.id} className="bg-slate-50 rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+                            <button onClick={() => setActiveAccordion(activeAccordion === index ? null : index)} className="w-full flex items-center justify-between p-5 md:p-6 text-left font-semibold text-slate-800 hover:bg-white transition text-sm md:text-base">
                                 {item.question}
                                 {activeAccordion === index ? <Minus size={20} className="text-blue-600 flex-shrink-0" /> : <Plus size={20} className="text-slate-400 flex-shrink-0" />}
                             </button>
                             <AnimatePresence>
                                 {activeAccordion === index && (
-                                    <motion.div initial={{ height: 0 }} animate={{ height: "auto" }} exit={{ height: 0 }} className="px-5 md:px-6 pb-6 text-slate-600 text-sm leading-relaxed border-t border-slate-100">
+                                    <motion.div initial={{ height: 0 }} animate={{ height: "auto" }} exit={{ height: 0 }} className="px-5 md:px-6 pb-6 text-slate-600 text-sm leading-relaxed border-t border-slate-200 bg-white">
                                         {item.answer}
                                     </motion.div>
                                 )}
